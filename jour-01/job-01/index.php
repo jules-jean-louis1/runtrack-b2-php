@@ -18,5 +18,5 @@ function my_str_search(string $haystack, string $needle): int {
     }
     return $count;
 }
-echo my_str_search("La Plateforme", "a");
+echo my_str_search("La Plateforme", "a"); /** retourne 2 **/
 ?>
