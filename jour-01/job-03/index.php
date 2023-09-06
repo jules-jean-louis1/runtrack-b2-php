@@ -7,4 +7,5 @@ function my_is_multipe(int $divide, int $multiple) : bool {
         return false;
     }
 }
+
 echo my_is_multipe(10, 5); // true
