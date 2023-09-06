@@ -6,11 +6,11 @@ function my_str_reverse(string $string): string {
         $i++;
     }
     $i--;
-    while (isset($string[$i])) {
+    while ($i >= 0) {
         $reverse .= $string[$i];
         $i--;
     }
     return $reverse;
 }
-echo my_str_reverse("La Plateforme"); /** retourne emroftaleP aL **/
+echo my_str_reverse("Hello"); // olleH
 ?>
