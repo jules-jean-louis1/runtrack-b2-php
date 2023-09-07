@@ -48,25 +48,16 @@ function log_in_db(){
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $bdd;
 }
-function find_full_rooms():array {
+
+function find_ordered_students():array {
     log_in_db();
-    $query = log_in_db()->prepare('SELECT room.name, room.capacity, COUNT(student.id) AS student_count
-                                            FROM room
-                                            LEFT JOIN student ON room.id = student.grade_id
-                                            GROUP BY room.name, room.capacity');
+    $query = log_in_db()->prepare('SELECT student.fullname, grade.name, grade.year
+                                            FROM student
+                                            INNER JOIN grade ON student.grade_id = grade.id
+                                            ORDER BY grade.year DESC');
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    $rooms = [];
-    foreach ($result as $room) {
-        $is_full = $room['student_count'] >= $room['capacity'] ? 'Oui' : 'Non';
-        $rooms[] = [
-            'name' => $room['name'],
-            'capacity' => $room['capacity'],
-            'is_full' => $is_full
-        ];
-    }
-    return $rooms;
+    
 }
 
 ?>
@@ -82,7 +73,7 @@ function find_full_rooms():array {
 </head>
 <body>
     <main class="flex justify-center">
-        <table border="1" class="flex gap-2">
+        <table border="1" class="text-center b-2">
             <tr class="border-2">
                 <th>Nom de la salle</th>
                 <th>Capacité</th>
