@@ -7,7 +7,8 @@ function log_in_db(){
 function insert_student(string $email, string $fullname, string $gender, DateTime $birthdate, int $gradeId): array {
     log_in_db();
     $query = log_in_db()->prepare('INSERT INTO students (grade_id, email, fullname, birthdate, gender) VALUES (:gradeId, :email, :fullname, :birthdate, :gender)');
-    $query->execute(['gradeId'=> $gradeId, 'email' => $email, 'fullname' => $fullname, 'birthdate' => $birthdate, 'gender' => $gender]);
+    $birthdateStr = $birthdate->format('Y-m-d');
+    $query->execute(['gradeId'=> $gradeId, 'email' => $email, 'fullname' => $fullname, 'birthdate' => $birthdateStr, 'gender' => $gender]);
     $result = $query->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
@@ -16,11 +17,11 @@ if (isset($_POST['submitBtn'])) {
         $email = $_POST['input-email'];
         $fullname = $_POST['input-fullname'];
         $gender = $_POST['input-gender'];
-        $birthdate = $_POST['input-birthdate'];
-        $myDateTime = new DateTime($birthdate);
+        $dateStr = $_POST['input-birthdate'];
+        $birthdate = DateTime::createFromFormat('Y-m-d', $dateStr);
         $gradeId = $_POST['input-grade_id'];
         $gradeId = intval($gradeId);
-        insert_student($email, $fullname, $gender, $myDateTime, $gradeId);
+        insert_student($email, $fullname, $gender, $birthdate, $gradeId);
         echo 'Etudiant ajouté';
     } else {
         echo 'Veuillez remplir tous les champs';
