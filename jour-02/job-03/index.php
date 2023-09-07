@@ -17,7 +17,7 @@ if (isset($_POST['submitBtn'])) {
         $fullname = $_POST['input-fullname'];
         $gender = $_POST['input-gender'];
         $birthdate = $_POST['input-birthdate'];
-        $myDateTime = DateTime::createFromFormat('Y-m-d', $birthdate);
+        $myDateTime = new DateTime($birthdate);
         $gradeId = $_POST['input-grade_id'];
         $gradeId = intval($gradeId);
         insert_student($email, $fullname, $gender, $myDateTime, $gradeId);
