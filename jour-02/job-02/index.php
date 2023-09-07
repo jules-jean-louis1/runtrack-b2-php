@@ -25,12 +25,12 @@ function find_one_student(string $email): array {
     <main>
         <form action="" method="get">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="input-mail-student" id="email">
             <input type="submit" value="Envoyer">
         </form>
     </main>
-    <?php if (isset($_GET['email'])):?>
-        <?php $student = find_one_student($_GET['email']);?>
+    <?php if (isset($_GET['input-mail-student'])):?>
+        <?php $student = find_one_student($_GET['input-mail-student']);?>
         <?php foreach ($student as $value) :?>
             <p><?= $value ?></p>
         <?php endforeach; ?>
