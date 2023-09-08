@@ -25,6 +25,8 @@ var_dump(findOneFloor(2));*/
 
 $grade = findOneGrade(1);
 $students = $grade->getStudents();
-print_r($students);
+var_dump($students);
+
+
 
 

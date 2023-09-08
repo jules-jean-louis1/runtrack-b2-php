@@ -22,33 +22,9 @@ class Grade
     {
         $pdo = new PDO("mysql:host=localhost;dbname=lp_official", "root", "");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query = $pdo->prepare("SELECT * FROM student WHERE grade_id = :id");
-        $query->execute(["id" => $this->id]);
-
-        $students = [];
-        while ($student = $query->fetch(PDO::FETCH_ASSOC)) {
-            $year = null;
-            if ($student['birthdate'] !== null) {
-                $year = new DateTime($student['birthdate']);
-            }
-            $student = new Student();
-            $student->setId($student['id']);
-            $student->setGradeId($student['grade_id']);
-            $student->setEmail($student['email']);
-            $student->setFullname($student['fullname']);
-            $student->setBirthdate($year);
-            $students[] = $student;
-        }
-        return $students;
-    }
-
-    public static function getStudentsForGrade(int $gradeId): array
-    {
-        $pdo = new PDO("mysql:host=localhost;dbname=lp_official", "root", "");
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query = $pdo->prepare("SELECT * FROM student WHERE grade_id = :grade_id");
-        $query->execute(["grade_id" => $gradeId]);
+        $query->execute(["grade_id" => $this->id]);
 
         $students = [];
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -58,6 +34,7 @@ class Grade
         return $students;
     }
     /**
+     *
      * @return int|null
      */
     public function getId(): ?int
