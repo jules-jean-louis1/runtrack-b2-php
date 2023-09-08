@@ -2,14 +2,14 @@
 
 class Student
 {
-    public ?int $id;
-    public ?int $gradeId;
-    public ?string $email;
-    public ?string $fullname;
-    public ?DateTime $birthdate;
-    public ?string $gender;
+    private ?int $id;
+    private ?int $gradeId;
+    private ?string $email;
+    private ?string $fullname;
+    private ?DateTime $birthdate;
+    private ?string $gender;
 
-    public function __construct(?int $id = null, ?int $gradeId = null, ?string $email = null, ?string $fullname = null, ?DateTime $birthdate = null, ?string $gender = null)
+    /*public function __construct(?int $id = null, ?int $gradeId = null, ?string $email = null, ?string $fullname = null, ?DateTime $birthdate = null, ?string $gender = null)
     {
         $this->id = $id;
         $this->gradeId = $gradeId;
@@ -17,8 +17,11 @@ class Student
         $this->fullname = $fullname;
         $this->birthdate = $birthdate;
         $this->gender = $gender;
-    }
+    }*/
+    public function __construct()
+    {
 
+    }
     /**
      * @return int|null
      */
