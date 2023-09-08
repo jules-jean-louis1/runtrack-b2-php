@@ -18,6 +18,19 @@ class Room
     {
 
     }
+    public function getGrades(): ?array
+    {
+        $pdo = new PDO("mysql:host=localhost;dbname=lp_official", "root", "");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $pdo->prepare("SELECT grade.* FROM grade JOIN room ON grade.room_id = room.id WHERE room.id = :room_id");
+        $query->execute(["room_id" => $this->id]);
+        $grades = [];
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $grade = new Grade($row['id'], $row['room_id'], $row['name'], new DateTime($row['year']));
+            $grades[] = $grade;
+        }
+        return $grades;
+    }
     /**
      * @return int|null
      */

@@ -23,10 +23,14 @@ var_dump(findOneStudent(1));
 var_dump(findOneRoom(1));
 var_dump(findOneFloor(2));*/
 
+/* JoB 05 */
 $grade = findOneGrade(1);
 $students = $grade->getStudents();
-var_dump($students);
 
+/* JoB 06 */
+$room = findOneRoom(1);
+$rooms = $room->getGrades();
+var_dump($rooms);
 
 
 
