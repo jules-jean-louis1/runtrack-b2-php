@@ -18,6 +18,19 @@ class Grade
     {
 
     }
+    public function getStudents(): ?array
+    {
+        $pdo = new PDO("mysql:host=localhost;dbname=lp_official", "root", "");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $pdo->prepare("SELECT * FROM student WHERE grade_id = :id");
+        $query->execute(["id" => $this->id]);
+
+        $students = [];
+        while ($student = $query->fetchObject("Student")) {
+            $students[] = $student;
+        }
+        return $students;
+    }
     /**
      * @return int|null
      */
@@ -81,5 +94,4 @@ class Grade
     {
         $this->year = $year;
     }
-
 }

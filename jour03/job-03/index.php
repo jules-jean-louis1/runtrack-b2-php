@@ -18,9 +18,12 @@ $floor = new Floor(1,'A', 1);
 $floor2 = new Floor();*/
 
 
-/*var_dump(findOneGrade(3));
-var_dump(findOneStudent(1));*/
+var_dump(findOneGrade(3));
+var_dump(findOneStudent(1));
 
+/*$grade = findOneGrade(1);
+$students = $grade->getStudents();
+var_dump($students);*/
 var_dump(findOneRoom(1));
 var_dump(findOneFloor(2));
 
